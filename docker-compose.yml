@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  aequify:
+    image: ngodn/aequify:latest
+    container_name: aequify
+    restart: on-failure
+    ports:
+        - "6969:6969"
+    volumes:
+      - ./configs:/aequify/user_data
+      - ./logs:/aequify/logs
+      - ./pyarmor.rkey:/aequify/pyarmor.rkey
+    logging:
+      options:
+        max-size: 2048m
+    command: >
+      python trade.py -a binance_01 -W ${PARAMS}

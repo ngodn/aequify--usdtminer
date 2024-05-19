@@ -1,0 +1,111 @@
+{
+    "multicore": true,
+    "hedge_mode": true,
+    "persisted_tick_purge_expiry_time": "5m",
+    "state_synchronize_interval_s": 5,
+    "initial_entry_ignore_not_found": true,
+    "override_max_exposure_ratio_check": true,
+    "plugins": {
+        "RestServer": {
+            "host": "127.0.0.1",
+            "port": 6969
+        }
+    },
+    "symbol_configs": [
+        {
+            "symbol": [
+                "XTZUSDT",
+                "DYDXUSDT",
+                "EOSUSDT",
+                "ALICEUSDT",
+                "CELOUSDT",
+                "CRVUSDT"
+            ],
+            "exchange_leverage": 10,
+            "long": {
+                "enabled": false,
+                "strategy": "BigLongStrategy",
+                "tick_execution_interval_ms": 250,
+                "mode": "NORMAL",
+                "wallet_exposure_ratio": 1,
+                "strategy_config": {
+                    "entry_order_type": "LIMIT",
+                    "cancel_orders_on_position_close": true,
+                    "limit_orders_reissue_threshold": 0.00001,
+                    "repost_lower_allowed": false,
+                    "dca": {
+                        "period": "3M",
+                        "period_timeframe": "1m",
+                        "algo": "LIN_PEAKS_TROUGHS_HIGHLOW",
+                        "nr_clusters": 6,
+                        "outer_price_level_nr": 1,
+                        "outer_price_period": "1W",
+                        "outer_price_timeframe": "1m",
+                        "outer_price_nr_clusters": 3,
+                        "outer_price_algo": "PEAKS_TROUGHS_HIGHLOW",
+                        "minimum_distance_to_outer_price": 0.019,
+                        "ratio_power": 0.65
+                    },
+                    "hedge": {
+                        "enabled": false,
+                        "first_order_type": "LIMIT",
+                        "activate_hedge_above_wallet_exposure_pct": 75,
+                        "dca_config": {
+                            "period": "3D",
+                            "period_timeframe": "1m",
+                            "algo": "LINEAR",
+                            "ratio_power": 0.65,
+                            "nr_clusters": 6,
+                            "outer_price_distance": 0.02
+                        }
+                    },
+                    "tp": {
+                        "minimum_tp": 0.0024
+                    }
+                }
+            },
+            "short": {
+                "enabled": false,
+                "strategy": "BigShortStrategy",
+                "tick_execution_interval_ms": 250,
+                "mode": "NORMAL",
+                "wallet_exposure_ratio": 1,
+                "strategy_config": {
+                    "entry_order_type": "LIMIT",
+                    "cancel_orders_on_position_close": true,
+                    "limit_orders_reissue_threshold": 0.00001,
+                    "repost_lower_allowed": false,
+                    "dca": {
+                        "period": "3M",
+                        "period_timeframe": "1m",
+                        "algo": "LIN_PEAKS_TROUGHS_HIGHLOW",
+                        "nr_clusters": 6,
+                        "outer_price_level_nr": 1,
+                        "outer_price_period": "2W",
+                        "outer_price_timeframe": "1m",
+                        "outer_price_nr_clusters": 3,
+                        "outer_price_algo": "PEAKS_TROUGHS_HIGHLOW",
+                        "minimum_distance_to_outer_price": 0.019,
+                        "ratio_power": 0.65
+                    },
+                    "hedge": {
+                        "enabled": false,
+                        "first_order_type": "LIMIT",
+                        "activate_hedge_above_wallet_exposure_pct": 75,
+                        "dca_config": {
+                            "period": "3D",
+                            "period_timeframe": "1m",
+                            "algo": "LINEAR",
+                            "ratio_power": 0.65,
+                            "nr_clusters": 6,
+                            "outer_price_distance": 0.02
+                        }
+                    },
+                    "tp": {
+                        "minimum_tp": 0.0024
+                    }
+                }
+            }
+        }
+    ]
+}
